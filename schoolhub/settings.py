@@ -9,10 +9,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-$*d6$q61)z0^v2h$f7mk=v&9pkmtqz+q5+rgnvlg%yoz-4=f1d'
 
-DEBUG = True
+DEBUG = False
 
 # ✅ IMPORTANT: allow Render + local
-ALLOWED_HOSTS = ['schoolhub-s4f4.onrender.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['schoolhub-s4f4.onrender.com']
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://schoolhub-s4f4.onrender.com'
+]
 
 
 INSTALLED_APPS = [
