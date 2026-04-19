@@ -8,13 +8,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 cloudinary.config(
     cloud_name="dhgmmdy0x",
     api_key="633227788589796",
-    api_secret="your_real_secret",
+    api_secret="kD4Soevk4bhY22rSyBjJRcAsmyI",
 )
 # 🔥 CLOUDINARY (FIXED)
 cloudinary.config(
     cloud_name="dhgmmdy0x",
     api_key=os.environ.get("CLOUDINARY_API_KEY"),
-    api_secret=os.environ.get("kD4Soevk4bhY22rSyBjJRcAsmyI"),
+    api_secret=os.environ.get("CLOUDINARY_API_SECRET"),
 )
 
 
@@ -56,7 +56,7 @@ MIDDLEWARE = [
 ]
 
 
-ROOT_URLCONF = 'schoolhub.urls'
+ROOT_URLCONF = 'digilab.urls'
 
 
 # 🧠 TEMPLATES
@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'schoolhub.wsgi.application'
+WSGI_APPLICATION = 'digilab.wsgi.application'
 
 
 # 🗄️ DATABASE (FIXED - SINGLE SOURCE ONLY)

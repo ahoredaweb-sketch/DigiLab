@@ -3,6 +3,10 @@ from .models import Material
 from django.db.models import Q
 from django.http import FileResponse
 
+from django.shortcuts import get_object_or_404, redirect
+from django.http import FileResponse, Http404
+from django.db.models import F
+import requests
 
 def home(request):
     title_query = request.GET.get('q')
@@ -46,14 +50,21 @@ def upload_material(request):
     return render(request, 'materials/upload.html')
 
 
-from django.db.models import F
-from django.shortcuts import get_object_or_404, redirect
-
 def download_material(request, pk):
     material = get_object_or_404(Material, pk=pk)
 
-    # ✅ safe counter increment (IMPORTANT)
-    Material.objects.filter(pk=pk).update(downloads=F('downloads') + 1)
+    material.downloads += 1
+    material.save()
 
-    # ✅ redirect to file
-    return redirect(material.file.url)
+    file_url = material.file.url
+
+    response = requests.get(file_url, stream=True)
+
+    if response.status_code != 200:
+        raise Http404("File not found")
+
+    return FileResponse(
+        response.raw,
+        as_attachment=True,
+        filename=material.file.name.split('/')[-1]
+    )

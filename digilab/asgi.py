@@ -1,5 +1,5 @@
 """
-ASGI config for schoolhub project.
+ASGI config for digilab project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 """
@@ -7,6 +7,6 @@ It exposes the ASGI callable as a module-level variable named ``application``.
 import os
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'schoolhub.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'digilab.settings')
 
 application = get_asgi_application()
