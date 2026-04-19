@@ -1,27 +1,27 @@
-"""
-Django settings for schoolhub project.
-"""
-
-from pathlib import Path
 import os
+from pathlib import Path
+import dj_database_url
 import cloudinary
-
-
-cloudinary.config(
-    cloud_name="dhgmmdy0x",
-    api_key=os.environ.get("633227788589796"),
-    api_secret=os.environ.get("kD4Soevk4bhY22rSyBjJRcAsmyI"),
-)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+cloudinary.config(
+    cloud_name="dhgmmdy0x",
+    api_key="633227788589796",
+    api_secret="your_real_secret",
+)
+# 🔥 CLOUDINARY (FIXED)
+cloudinary.config(
+    cloud_name="dhgmmdy0x",
+    api_key=os.environ.get("CLOUDINARY_API_KEY"),
+    api_secret=os.environ.get("kD4Soevk4bhY22rSyBjJRcAsmyI"),
+)
 
+
+# 🔐 SECURITY
 SECRET_KEY = 'django-insecure-$*d6$q61)z0^v2h$f7mk=v&9pkmtqz+q5+rgnvlg%yoz-4=f1d'
+DEBUG = False
 
-DEBUG = True
-
-# ✅ IMPORTANT: allow Render + local
 ALLOWED_HOSTS = ['schoolhub-s4f4.onrender.com']
 
 CSRF_TRUSTED_ORIGINS = [
@@ -29,6 +29,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
+# 📦 APPS
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -36,12 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'cloudinary',
     'cloudinary_storage',
-
     'materials',
 ]
 
+
+# ⚙️ MIDDLEWARE
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -52,8 +55,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 ROOT_URLCONF = 'schoolhub.urls'
 
+
+# 🧠 TEMPLATES
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -72,46 +78,41 @@ TEMPLATES = [
 WSGI_APPLICATION = 'schoolhub.wsgi.application'
 
 
+# 🗄️ DATABASE (FIXED - SINGLE SOURCE ONLY)
 import dj_database_url
+import os
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True
-    )
-}
-
-AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
-]
-
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_TZ = True
-
-STATIC_URL = 'static/'
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-if os.environ.get('DATABASE_URL'):
+if os.environ.get("DATABASE_URL"):
     DATABASES = {
-        'default': dj_database_url.config(
-            default=os.environ.get('DATABASE_URL'),
+        "default": dj_database_url.config(
+            default=os.environ.get("DATABASE_URL"),
             conn_max_age=600,
             ssl_require=True
         )
     }
 else:
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+
+
+# 🌍 LANGUAGE
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_TZ = True
+
+
+# 📦 STATIC FILES
+STATIC_URL = '/static/'
+
+
+# ☁️ CLOUDINARY STORAGE (FIXED)
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+# 🔑 DEFAULT AUTO FIELD
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

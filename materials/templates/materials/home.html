@@ -1,17 +1,224 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SchoolHub - Home</title>
+    <title>SchoolHub</title>
+
+    <!-- Mobile responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1145368553393613"
+crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f5f7fa;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .logo svg {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        .top-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input {
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .upload-btn {
+            margin-top: 15px;
+            display: block;
+            text-align: center;
+            background: #28a745;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .download {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .empty {
+            text-align: center;
+            color: #777;
+            margin-top: 30px;
+        }
+
+        @media (min-width: 700px) {
+            .top-bar {
+                flex-direction: row;
+            }
+
+            input {
+                flex: 1;
+            }
+
+            button {
+                width: 150px;
+            }
+        }
+    </style>
 </head>
+
 <body>
+
+<div class="container">
+
+    <!-- SVG LOGO -->
+    <div class="logo">
+        <!-- PASTE YOUR SVG HERE -->
+        <svg width="600" height="140" viewBox="0 0 600 140" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .logo-text { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 48px; }
+    .tagline { font-family: Arial, Helvetica, sans-serif; font-weight: 400; font-size: 14px; fill: #1F4E79; letter-spacing: 0.5px; }
+    .orange { fill: #F58220; }
+    .blue { fill: #1F4E79; }
+    .light-blue { fill: #4A90E2; }
+    .green { fill: #7ED321; }
+    .dot-teal { fill: #50E3C2; }
+  </style>
+
+  <!-- Open book base -->
+  <path class="blue" d="M20 85 Q60 75 100 85 L100 95 Q60 85 20 95 Z"/>
+  <path class="blue" d="M100 85 Q140 75 180 85 L180 95 Q140 85 100 95 Z"/>
+  <path class="blue" d="M15 90 L185 90 L182 98 L18 98 Z"/>
+
+  <!-- Left document - orange -->
+  <rect class="orange" x="45" y="45" width="20" height="28" rx="2"/>
+  <rect fill="white" x="50" y="50" width="10" height="2"/>
+  <rect fill="white" x="50" y="55" width="10" height="2"/>
+  <rect fill="white" x="50" y="60" width="7" height="2"/>
+
+  <!-- Center screen - blue -->
+  <rect class="light-blue" x="75" y="38" width="32" height="35" rx="3"/>
+  <rect class="blue" x="79" y="42" width="24" height="16" rx="1" fill="none" stroke="white" stroke-width="1.5"/>
+  <circle fill="white" cx="91" cy="50" r="4"/>
+  <path fill="white" d="M88 48 L91 53 L96 46" stroke="white" stroke-width="1.5" fill="none"/>
+  <rect class="blue" x="85" y="73" width="12" height="3" rx="1"/>
+  <rect class="blue" x="80" y="76" width="22" height="2" rx="1"/>
+
+  <!-- Right document - green with checkmark -->
+  <rect class="light-blue" x="115" y="45" width="20" height="28" rx="2"/>
+  <circle class="green" cx="125" cy="55" r="6"/>
+  <path fill="white" d="M122 55 L124.5 57.5 L128 54" stroke="white" stroke-width="1.5" fill="none"/>
+  <rect fill="white" x="120" y="64" width="10" height="2"/>
+  <rect fill="white" x="120" y="69" width="7" height="2"/>
+
+  <!-- Graduation cap -->
+  <path class="blue" d="M138 35 L150 42 L138 49 L126 42 Z"/>
+  <rect class="blue" x="135" y="49" width="6" height="4"/>
+  <circle class="orange" cx="141" cy="53" r="1.5"/>
+
+  <!-- Connecting arc with dots -->
+  <path class="blue" d="M55 38 Q91 25 127 38" fill="none" stroke="#1F4E79" stroke-width="2"/>
+  <circle class="dot-teal" cx="65" cy="33" r="2.5"/>
+  <circle class="orange" cx="91" cy="28" r="3.5"/>
+  <circle class="dot-teal" cx="117" cy="33" r="2.5"/>
+
+  <!-- SchoolHub text - FIXED: Single text element with tspan for color -->
+  <text x="210" y="70" class="logo-text">
+    <tspan fill="#1F4E79">School</tspan><tspan fill="#F58220">Hub</tspan>
+  </text>
+
+  <!-- Tagline with lines - adjusted width -->
+  <line x1="210" y1="85" x2="285" y2="85" stroke="#1F4E79" stroke-width="1"/>
+  <line x1="420" y1="85" x2="495" y2="85" stroke="#1F4E79" stroke-width="1"/>
+  <text x="352" y="90" text-anchor="middle" class="tagline">Share   ·   Learn   ·   Grow</text>
+</svg>
+    </div>
 
     <h1>📚 School Materials</h1>
 
-    <a href="/upload/">➕ Upload Material</a>
+    <!-- Advanced Search -->
+    <form method="GET" class="top-bar">
+        <input type="text" name="q" placeholder="Search by title...">
+        <input type="text" name="course" placeholder="Search by course...">
+        <button type="submit">Search</button>
+    </form>
 
-    <hr>
+    <a href="/upload/" class="upload-btn">➕ Upload Material</a>
 
-    <p>No materials yet.</p>
+    <!-- AdSense Banner -->
+    <div style="margin-top:20px; text-align:center;">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-1145368553393613"
+            data-ad-slot="1234567890"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- Materials -->
+    {% if materials %}
+        {% for material in materials %}
+            <div class="card">
+                <h3>{{ material.title }}</h3>
+                <p>{{ material.course }}</p>
+
+                <div class="download">
+                    <a href="{% url 'download' material.id %}">📥 Download</a>
+                    <span>⬇ {{ material.downloads }} downloads</span>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="empty">No materials yet.</p>
+    {% endif %}
+
+</div>
 
 </body>
 </html>
