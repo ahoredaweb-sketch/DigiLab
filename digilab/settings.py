@@ -10,7 +10,7 @@ cloudinary.config(
     api_key="633227788589796",
     api_secret="kD4Soevk4bhY22rSyBjJRcAsmyI",
 )
-# 🔥 CLOUDINARY (FIXED)
+# 🔥 CLOUDINARY
 cloudinary.config(
     cloud_name="dhgmmdy0x",
     api_key=os.environ.get("CLOUDINARY_API_KEY"),
@@ -20,7 +20,7 @@ cloudinary.config(
 
 # 🔐 SECURITY
 SECRET_KEY = 'django-insecure-$*d6$q61)z0^v2h$f7mk=v&9pkmtqz+q5+rgnvlg%yoz-4=f1d'
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['schoolhub-s4f4.onrender.com']
 
