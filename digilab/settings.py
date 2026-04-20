@@ -20,7 +20,7 @@ cloudinary.config(
 
 # 🔐 SECURITY
 SECRET_KEY = 'django-insecure-$*d6$q61)z0^v2h$f7mk=v&9pkmtqz+q5+rgnvlg%yoz-4=f1d'
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['schoolhub-s4f4.onrender.com']
 
