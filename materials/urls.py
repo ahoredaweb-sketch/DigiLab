@@ -3,7 +3,6 @@ from . import views
 from django.shortcuts import get_object_or_404, redirect
 from .models import Material
 
-
 from django.urls import path
 from . import views
 
