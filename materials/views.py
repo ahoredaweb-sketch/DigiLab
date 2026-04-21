@@ -76,15 +76,23 @@ from .models import Material
 def download(request, id):
     material = get_object_or_404(Material, id=id)
 
+    # Debug info
+    print("Material:", material)
+    print("File:", material.file)
+
     if not material.file:
-        return HttpResponse("No file attached", status=404)
+        return HttpResponse("❌ No file attached", status=404)
 
     try:
         file_url = material.file.url
+        print("File URL:", file_url)
     except Exception as e:
-        return HttpResponse(f"File error: {str(e)}", status=500)
+        return HttpResponse(f"❌ URL error: {str(e)}", status=500)
 
-    material.downloads += 1
-    material.save()
+    try:
+        material.downloads += 1
+        material.save()
+    except Exception as e:
+        return HttpResponse(f"❌ DB error: {str(e)}", status=500)
 
     return redirect(file_url)

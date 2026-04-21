@@ -3,11 +3,11 @@
 <head>
     <title>DigiLab</title>
 
-    <!-- Mobile responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1145368553393613"
-crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
 
     <style>
         body {
@@ -17,11 +17,12 @@ crossorigin="anonymous"></script>
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: auto;
-            padding: 20px;
+            padding: 15px;
         }
 
+        /* ✅ FIXED LOGO RESPONSIVENESS */
         .logo {
             text-align: center;
             margin-bottom: 10px;
@@ -29,13 +30,14 @@ crossorigin="anonymous"></script>
 
         .logo svg {
             width: 100%;
-            max-width: 400px;
+            max-width: 320px; /* prevents overflow on phone */
+            height: auto;
         }
 
         h1 {
             text-align: center;
-            font-size: 26px;
-            margin-bottom: 20px;
+            font-size: 22px;
+            margin-bottom: 15px;
         }
 
         .top-bar {
@@ -62,7 +64,7 @@ crossorigin="anonymous"></script>
         }
 
         .upload-btn {
-            margin-top: 15px;
+            margin-top: 10px;
             display: block;
             text-align: center;
             background: #28a745;
@@ -73,12 +75,30 @@ crossorigin="anonymous"></script>
             text-decoration: none;
         }
 
+        /* ✅ FIX ADS GAP */
+        .ad-container {
+            margin: 15px 0;
+            text-align: center;
+            display: none;
+        }
+
         .card {
             background: white;
-            padding: 15px;
-            margin-top: 15px;
+            padding: 14px;
+            margin-top: 12px;
             border-radius: 10px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+        }
+
+        .card p {
+            margin: 0;
+            color: #555;
+            font-size: 14px;
         }
 
         .download {
@@ -88,12 +108,20 @@ crossorigin="anonymous"></script>
             margin-top: 10px;
         }
 
+        .download a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
         .empty {
             text-align: center;
             color: #777;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
+        /* ✅ MOBILE + DESKTOP BALANCE */
         @media (min-width: 700px) {
             .top-bar {
                 flex-direction: row;
@@ -104,7 +132,15 @@ crossorigin="anonymous"></script>
             }
 
             button {
-                width: 150px;
+                width: 140px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .card h3 {
+                font-size: 20px;
             }
         }
     </style>
@@ -114,8 +150,9 @@ crossorigin="anonymous"></script>
 
 <div class="container">
 
-    <!-- SVG LOGO -->
-    <svg width="600" height="145" viewBox="0 0 600 145" xmlns="http://www.w3.org/2000/svg">
+    <!-- ✅ SVG LOGO RESTORED -->
+    <div class="logo">
+        <svg width="600" height="145" viewBox="0 0 600 145" xmlns="http://www.w3.org/2000/svg">
   <style>
     .logo-text { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 48px; }
     .tagline { font-family: Arial, Helvetica, sans-serif; font-weight: 400; font-size: 16px; fill: #1F4E79; letter-spacing: 0.5px; }
@@ -175,29 +212,36 @@ crossorigin="anonymous"></script>
 
     <h1>📚 School Materials</h1>
 
-    <!-- Advanced Search -->
+    <!-- SEARCH -->
     <form method="GET" class="top-bar">
         <input type="text" name="q" placeholder="Search by title...">
         <input type="text" name="course" placeholder="Search by course...">
         <button type="submit">Search</button>
     </form>
 
+    <!-- UPLOAD -->
     <a href="/upload/" class="upload-btn">➕ Upload Material</a>
 
-    <!-- AdSense Banner -->
-    <div style="margin-top:20px; text-align:center;">
+    <!-- ✅ ADS FIXED -->
+    <div id="ad-container" class="ad-container">
         <ins class="adsbygoogle"
             style="display:block"
             data-ad-client="ca-pub-1145368553393613"
             data-ad-slot="1234567890"
             data-ad-format="auto"
             data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
     </div>
 
-    <!-- Materials -->
+    <script>
+        try {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            document.getElementById("ad-container").style.display = "block";
+        } catch(e) {
+            console.log("Ad failed");
+        }
+    </script>
+
+    <!-- MATERIALS -->
     {% if materials %}
         {% for material in materials %}
             <div class="card">
@@ -205,7 +249,7 @@ crossorigin="anonymous"></script>
                 <p>{{ material.course }}</p>
 
                 <div class="download">
-                    <a href="{% url 'download' material.id %}">📥 Download</a>
+                    <a href="{% url 'download' material.id %}" target="_blank">📥 Download</a>
                     <span>⬇ {{ material.downloads }} downloads</span>
                 </div>
             </div>
