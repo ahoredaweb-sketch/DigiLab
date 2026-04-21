@@ -7,6 +7,8 @@ class Material(models.Model):
     course = models.CharField(max_length=100, db_index=True)
     file = models.FileField(upload_to='materials/')
 
+    downloads = models.PositiveIntegerField(default=0)
+
     uploaded_by = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
