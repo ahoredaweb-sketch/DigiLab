@@ -70,10 +70,21 @@ def download_material(request, pk):
     )
 
 from django.shortcuts import get_object_or_404, redirect
+from django.http import HttpResponse
 from .models import Material
 
 def download(request, id):
     material = get_object_or_404(Material, id=id)
+
+    if not material.file:
+        return HttpResponse("No file attached", status=404)
+
+    try:
+        file_url = material.file.url
+    except Exception as e:
+        return HttpResponse(f"File error: {str(e)}", status=500)
+
     material.downloads += 1
     material.save()
-    return redirect(material.file.url)
+
+    return redirect(file_url)
