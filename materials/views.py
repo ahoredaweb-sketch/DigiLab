@@ -54,12 +54,10 @@ def upload_material(request):
 def download(request, id):
     material = get_object_or_404(Material, id=id)
 
-    # increase download count
     material.downloads += 1
     material.save()
 
-    # redirect to Cloudinary URL
-    return redirect(material.file.url)
+    return redirect(material.file.url + "?fl_attachment=true")
 
 
 # ✅ DELETE (ADMIN LATER)
