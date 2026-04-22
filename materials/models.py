@@ -1,12 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 
 class Material(models.Model):
     title = models.CharField(max_length=200, db_index=True)
     course = models.CharField(max_length=100, db_index=True)
-    file = models.FileField(upload_to='materials/')
 
+    # 🔥 FIXED: Cloudinary file storage
+    file = CloudinaryField(resource_type='raw')
+
+    # 🔥 SINGLE download counter (no duplicates)
     downloads = models.PositiveIntegerField(default=0)
 
     uploaded_by = models.ForeignKey(
@@ -16,7 +20,6 @@ class Material(models.Model):
         blank=True
     )
 
-    download_count = models.PositiveIntegerField(default=0)  # 🔥 renamed for clarity
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -5,10 +5,12 @@ import cloudinary
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import os
+
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dhgmmdy0x',
-    'API_KEY': '633227788589796',
-    'API_SECRET': 'kD4Soevk4bhY22rSyBjJRcAsmyI',
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

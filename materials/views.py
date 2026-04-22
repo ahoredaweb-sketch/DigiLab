@@ -1,13 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Material
-from django.db.models import Q
-from django.http import FileResponse
+from django.http import HttpResponse
 
-from django.shortcuts import get_object_or_404, redirect
-from django.http import FileResponse, Http404
-from django.db.models import F
-import requests
 
+# ✅ HOME VIEW
 def home(request):
     title_query = request.GET.get('q')
     course_query = request.GET.get('course')
@@ -27,6 +23,7 @@ def home(request):
     })
 
 
+# ✅ UPLOAD VIEW (Cloudinary-safe)
 def upload_material(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -38,53 +35,34 @@ def upload_material(request):
                 'error': 'No file selected'
             })
 
-        Material.objects.create(
-            title=title,
-            course=course,
-            file=file,
-            uploaded_by=None
-        )
+        try:
+            Material.objects.create(
+                title=title,
+                course=course,
+                file=file,
+                uploaded_by=request.user if request.user.is_authenticated else None
+            )
+        except Exception as e:
+            return HttpResponse(f"Upload error: {str(e)}")
 
         return redirect('home')
 
     return render(request, 'materials/upload.html')
 
 
-def download_material(request, pk):
-    material = get_object_or_404(Material, pk=pk)
+# ✅ DOWNLOAD (CORRECT FOR CLOUDINARY)
+def download(request, id):
+    material = get_object_or_404(Material, id=id)
 
+    # increase download count
     material.downloads += 1
     material.save()
 
-    file_url = material.file.url
+    # redirect to Cloudinary URL
+    return redirect(material.file.url)
 
-    response = requests.get(file_url, stream=True)
 
-    if response.status_code != 200:
-        raise Http404("File not found")
-
-    return FileResponse(
-        response.raw,
-        as_attachment=True,
-        filename=material.file.name.split('/')[-1]
-    )
-
-from django.shortcuts import get_object_or_404, redirect
-from django.http import HttpResponse
-from .models import Material
-
-def download(request, id):
-    from django.http import HttpResponse
-    material = get_object_or_404(Material, id=id)
-
-    return HttpResponse(f"""
-    TITLE: {material.title}<br>
-    FILE FIELD: {material.file}<br>
-    FILE URL: {getattr(material.file, 'url', 'NO URL')}<br>
-    """)
-
-from django.shortcuts import redirect
-
+# ✅ DELETE (ADMIN LATER)
 def delete_material(request, id):
     material = get_object_or_404(Material, id=id)
     material.delete()
