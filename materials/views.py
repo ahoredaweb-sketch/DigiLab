@@ -59,9 +59,8 @@ def download(request, id):
 
     return redirect(material.file.url)
 
-
-# ✅ DELETE (ADMIN LATER)
-def delete_material(request, id):
-    material = get_object_or_404(Material, id=id)
-    material.delete()
-    return redirect('home')
+# ✅ DELETE MATERIAL
+def delete_all_materials(request):
+    count = Material.objects.count()
+    Material.objects.all().delete()
+    return HttpResponse(f"Deleted {count} materials successfully.")
