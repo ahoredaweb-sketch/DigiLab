@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 from django.http import HttpResponse
-from .models import Material
+
 
 
 class Material(models.Model):
