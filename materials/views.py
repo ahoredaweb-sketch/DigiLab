@@ -57,7 +57,7 @@ def download(request, id):
     material.downloads += 1
     material.save()
 
-    return redirect(material.file.url + "?fl_attachment=true")
+    return redirect(material.file.url)
 
 
 # ✅ DELETE (ADMIN LATER)
